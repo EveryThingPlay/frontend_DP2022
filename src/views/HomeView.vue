@@ -43,7 +43,7 @@
             cols="4"
           >
             <v-img
-              :src="n"
+              :src="n.url"
               :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
               aspect-ratio="1"
               class="bg-grey-lighten-2"
