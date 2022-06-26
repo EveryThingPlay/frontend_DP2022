@@ -62,7 +62,6 @@
                   class="bg-grey-lighten-2"
                   style="margin: auto; width: 90vh"
                 />
-                <h1>{{ images.indexOf(n) }}</h1>
               </v-overlay>
               <template v-slot:placeholder>
                 <v-row class="fill-height ma-0" align="center" justify="center">
