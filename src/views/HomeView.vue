@@ -38,7 +38,7 @@
         <v-row>
           <v-col
             v-for="n in images"
-            :key="n"
+            :key="images.indexOf(n)"
             class="d-flex child-flex"
             cols="4"
           >
@@ -47,7 +47,23 @@
               :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
               aspect-ratio="1"
               class="bg-grey-lighten-2"
+              @click="show(n)"
             >
+              <v-overlay
+                fixed
+                class="align-center justify-center"
+                style="height: 100vh; width: 100vw"
+                v-if="overlay == images.indexOf(n)"
+                v-model="showOverlay"
+              >
+                <v-img
+                  :src="n.url"
+                  aspect-ratio="1"
+                  class="bg-grey-lighten-2"
+                  style="margin: auto; width: 90vh"
+                />
+                <h1>{{ images.indexOf(n) }}</h1>
+              </v-overlay>
               <template v-slot:placeholder>
                 <v-row class="fill-height ma-0" align="center" justify="center">
                   <v-progress-circular
@@ -72,11 +88,13 @@
   export default {
     data() {
       return {
+        showOverlay: false,
         tags: [],
         reqTags: [],
         images: [],
         mode: "Широкий (ИЛИ)",
         notfound: false,
+        overlay: null,
       };
     },
     async mounted() {
@@ -104,6 +122,10 @@
         } else {
           return "and";
         }
+      },
+      show(n) {
+        this.overlay = this.images.indexOf(n);
+        this.showOverlay = true;
       },
     },
   };
